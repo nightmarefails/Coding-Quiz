@@ -74,6 +74,27 @@ function buildAnswers() {
     }
 }
 
+//Logic Handlers for events
+function checkAnswer(event) {
+    var correct = event.target.dataset.correct
+    if (correct == "true") {
+        console.log("correct");
+        score += 50;
+    } else {
+        console.log("wrong");
+        score -= 25;
+    }
+
+    testIndex++;
+    setScore();
+
+    if (testIndex > test.length - 1)  {
+        endGame();
+    } else {
+        nextQuestion();
+    }
+}
+
 function setScore() {
     scoreText.textContent = score;
 }
@@ -82,11 +103,58 @@ function setTimer(value) {
     timerText.textContent = value;
 }
 
+function secondsToTimer(time) {
+    var minutes = Math.floor(time / 60);
+    var seconds = time % 60;
+    var secondsValue = seconds;
+    if (seconds < 10) {
+        secondsValue = "0" + seconds;
+        }
+    timerValue = minutes + ":" + secondsValue;
 
+    return timerValue;
+}
 
+function startTimer() {
+    console.log("Start Timer");
+    var timer = setInterval(function(){
+        if (!gameRunning) {
+            clearInterval(timer);
+        } else if (timerLength == 0) {
+            clearInterval(timer);
+            endGame();
+        } else {
+            timerLength--;
+            setTimer(secondsToTimer(timerLength));
+        }
+    }, 1000);
+}
 
+function nextQuestion() {
+    setQuestionText()
+    clearAnswers();
+    buildAnswers();
+}
 
+function startQuiz() {
+    testIndex = 2;
+    gameRunning = true;
+    clearAnswers();    
+    setQuestionText();
+    buildAnswers();
+    startTimer();
+    startButton.disabled = true;
+}
 
+function endGame() {
+    gameRunning = false;
+    console.log("Game Over")
+    testIndex = 1
+    setQuestionText();
+    clearAnswers();
+    createForm();
+
+}
 
 //Page initializer and function that runs when page is reset;
 function initialize() {
@@ -97,7 +165,12 @@ function initialize() {
     buildAnswers();
     setScore(score);
     setTimer("3:00");
+    gameRunning = false;
+    startButton.disabled = false;
 }
 
 initialize();
+
+//Event Listeners
+startButton.addEventListener("click", startQuiz);
 
