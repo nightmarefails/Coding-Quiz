@@ -34,5 +34,51 @@ var score = 0;
 var gameRunning = true
 var timerLength = 180;
 
+function setQuestionText() {
+    questionText.textContent = test[testIndex].question;
+}
 
+function clearAnswers() {
+    var numAnswers = answerList.childElementCount
+    for (var i = 0; i < numAnswers; i++) {
+        if (answerList.firtChild === null) {
+            return
+        } else {
+            answerList.firstChild.remove();
+        }
+    }
+}
+
+function buildAnswers() {
+    var questionInfo = test[testIndex];
+    var possibleAnswers = questionInfo.answers;
+    var correctAnswer = questionInfo.correct;
+
+    for (var x = 0; x < possibleAnswers.length; x++) {
+        var listEl = document.createElement("li");
+        var buttonEl =document.createElement("button");
+
+        buttonEl.textContent = possibleAnswers[x];
+
+        if (possibleAnswers[x] == correctAnswer) {
+            buttonEl.dataset.correct = "true";
+        } else {
+            buttonEl.dataset.correct = "false";
+        }
+
+        if (testIndex != 0) {
+            buttonEl.addEventListener("click", checkAnswer)
+        }
+        listEl.append(buttonEl);
+        answerList.append(listEl);
+    }
+}
+
+function setScore() {
+    scoreText.textContent = score;
+}
+
+function setTimer(value) {
+    timerText.textContent = value;
+}
 
