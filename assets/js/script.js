@@ -82,3 +82,22 @@ function setTimer(value) {
     timerText.textContent = value;
 }
 
+
+
+
+
+
+
+//Page initializer and function that runs when page is reset;
+function initialize() {
+    testIndex = 0;
+    score = 0;
+    setQuestionText();
+    clearAnswers();
+    buildAnswers();
+    setScore(score);
+    setTimer("3:00");
+}
+
+initialize();
+
