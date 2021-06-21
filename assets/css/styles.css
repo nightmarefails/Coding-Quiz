@@ -70,3 +70,16 @@ button {
 #scoreBoard {
     flex-basis: 25%;
 }
+
+.leaderSub {
+    flex: 1 1 100%;
+}
+
+#leaderBoard {
+    flex-direction: column;
+}
+
+ul {
+    list-style: none;
+    padding: 15px;
+}
