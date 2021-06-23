@@ -47,7 +47,7 @@ var test = [
         correct: "Cascading Style Sheets"
     },
     {
-        question: "What is the correct HTMl for referring to an external style sheet?",
+        question: "What is the correct HTML for referring to an external style sheet?",
         answers: ["<link rel=\"stylesheet\" type=\"text/css\" href=\"mystyle.css\">", "<style src=\"mystyle.css\">", "<stylesheet>mystyle.css</stylesheet>"],
         correct: "<link rel=\"stylesheet\" type=\"text/css\" href=\"mystyle.css\">"
     },
