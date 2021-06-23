@@ -231,8 +231,10 @@ function startTimer() {
     var timer = setInterval(function(){
         if (!gameRunning) {
             clearInterval(timer);
-        } else if (timerLength == 0) {
+        } else if (timerLength <= 0) {
+            timerLength = 0;
             clearInterval(timer);
+            setTimer(secondsToTimer(timerLength));
             endGame();
         } else {
             timerLength--;
